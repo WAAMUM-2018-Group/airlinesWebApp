@@ -1,0 +1,85 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		
+		<h3>List of Flights</h3>
+
+		<h:form rendered="#{not empty bankController.accounts}">
+			<h:dataTable value="#{bankController.accounts}" var="account"
+				class="table">
+
+				<h:column>
+					<f:facet name="header">Account Number:</f:facet>
+					<h:outputText value="#{account.accountnumber}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Customer Number:</f:facet>
+					<h:outputText value="#{account.customer.name}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Action:</f:facet>
+						<h:commandLink value="Details" action="#{bankController.accountDetails(account)}"></h:commandLink>
+				</h:column>
+
+			</h:dataTable>
+			<h:column>
+				<h:commandButton value="Add an Account"
+					action="#{bankController.setCreate(true)}" class="btn btn-primary"></h:commandButton>
+			</h:column>
+		</h:form>
+		
+		<h:panelGroup rendered="#{empty bankController.accounts}">
+			<p>No Accounts! Please add an account.</p>
+			<h:column>
+				<h:commandButton value="Add an Account"
+					action="#{bankController.setCreate(true)}" class="btn btn-primary"></h:commandButton>
+			</h:column>
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{bankController.create}">
+		<div class="card">
+			<div class="card-body">
+				<f:view>
+					<h:form>
+						<div class="form-inline">
+							<h:outputLabel>Account Number:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:outputText value="#{bankController.account.accountnumber}"
+								class="form-control"></h:outputText>
+						</div>
+						<br />
+						<div class="form-inline">
+							<h:outputLabel>Customer Number:&nbsp;&nbsp;</h:outputLabel>
+							<h:inputText value="#{bankController.account.customer.name}"
+								class="form-control"></h:inputText>
+						</div>
+						<br />
+						<div class="form-inline">
+							<h:commandButton value="Create" class="btn btn-primary" action="#{bankController.createAccount}"></h:commandButton>
+						</div>
+					</h:form>
+				</f:view>
+				</div>
+		</div>
+		</h:panelGroup>
+		
+	</div>
+</h:body>
+</html>
