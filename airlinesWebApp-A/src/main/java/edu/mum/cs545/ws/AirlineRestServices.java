@@ -40,6 +40,7 @@ public class AirlineRestServices {
 	@ApiOperation(value="Get All Airlines", notes = "Get all airlines", 
 				response=Airline.class, responseContainer="List")
 	public List<Airline> getAllAirlines() {
+		int a;
 		return airlineService.findAll();
 		
 	}
