@@ -1,0 +1,129 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<h3>Welcome to Roz bank</h3>
+		<div class="card">
+			<div class="card-header">Account Details</div>
+			<div class="card-body">
+				<f:view>
+					<h:form>
+						<div class="form-inline">
+							<h:outputLabel>Account Number:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:outputText value="#{bankController.account.accountnumber}"
+								class="form-control"></h:outputText>
+						</div>
+						<br />
+						<div class="form-inline">
+							<h:outputLabel>Customer Number:&nbsp;&nbsp;</h:outputLabel>
+							<h:outputText value="#{bankController.account.customer.name}"
+								class="form-control"></h:outputText>
+						</div>
+						<br />
+					</h:form>
+				</f:view>
+
+			<h:form rendered="#{not empty bankController.account.entryList}">
+				<div class="card">
+					<div class="card-header">
+						<h3>Transactions</h3>
+					</div>
+					<div class="card-body">
+						<h:dataTable value="#{bankController.account.entryList}"
+							var="accountEntry" class="table">
+						<h:column>
+								<f:facet name="header">Date</f:facet> #{accountEntry.date}
+						</h:column>
+						<h:column>
+								<f:facet name="header">Amout</f:facet> #{accountEntry.amount}
+						</h:column>
+						<h:column>
+								<f:facet name="header">Description</f:facet> #{accountEntry.description}
+						</h:column>
+						<h:column>
+								<f:facet name="header">From</f:facet> #{accountEntry.fromPersonName}
+						</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+		   </h:form>
+				<!-- 				<h:panelGroup rendered="#{!bankController.deposit}"> -->
+				<hr></hr>
+				<div class="card">
+					<div class="card-header">
+						<h3>Add Deposit</h3>
+					</div>
+					<div class="card-body">
+						<f:view>
+							<h:form>
+								<div class="form-inline">
+									<h:outputLabel>Amount:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+									<h:inputText value="#{bankController.depositAmount}"
+										var="amount" class="form-control"></h:inputText>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<h:commandButton value="Deposit"
+										action="#{bankController.depositMoney()}"
+										class="btn btn-primary"></h:commandButton>
+									&nbsp;
+								</div>
+							</h:form>
+						</f:view>
+					</div>
+				</div>
+				<!-- 				</h:panelGroup> -->
+
+				<hr></hr>
+				<div class="card">
+					<div class="card-header">
+						<h3>Transfer Funds</h3>
+					</div>
+					<div class="card-body">
+						<f:view>
+							<h:form>
+								<div class="form-group">
+									<h:outputLabel>From Account Number:</h:outputLabel>
+									<h:outputText value="#{bankController.account.accountnumber}" class="form-control"></h:outputText>
+								</div>
+								<div class="form-group">
+									<h:outputLabel>To Account Number:</h:outputLabel>
+									<h:selectOneMenu value="#{bankController.toAccountNumber}" class="form-control">
+										<f:selectItems value="#{bankController.accounts}" var="account"
+											itemLabel="#{account.accountnumber}" itemValue="#{account.accountnumber}"></f:selectItems>
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">	
+									<h:outputLabel>Transfer Amount:</h:outputLabel>
+									<h:inputText value="#{bankController.amount}" class="form-control"></h:inputText>
+								</div>
+								<div class="form-group">
+									<h:outputLabel>Description:</h:outputLabel>
+									<h:inputText value="#{bankController.description}" class="form-control"></h:inputText>
+								</div>
+								<div class="form-group">
+									<h:commandButton value="Transfer" action="#{bankController.transferFunds}" class="btn btn-primary"></h:commandButton>
+								</div>
+								<br />
+							</h:form>
+						</f:view>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
