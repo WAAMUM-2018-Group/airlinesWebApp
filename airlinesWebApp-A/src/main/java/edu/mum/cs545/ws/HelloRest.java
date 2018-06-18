@@ -5,6 +5,7 @@ import javax.inject.Named;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import cs545.airline.model.Airline;
@@ -18,6 +19,7 @@ public class HelloRest {
 	private AirlineService airlineService;
 
 	@GET
+//	@Produces("text/html")
 	public String helloWorld(@DefaultValue("Gorgeous") @QueryParam("name") String name) {
 		return "Hello " + name + "!";
 	}
