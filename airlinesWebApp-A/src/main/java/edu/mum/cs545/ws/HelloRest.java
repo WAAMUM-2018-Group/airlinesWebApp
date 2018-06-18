@@ -21,6 +21,9 @@ public class HelloRest {
 	@GET
 //	@Produces("text/html")
 	public String helloWorld(@DefaultValue("Gorgeous") @QueryParam("name") String name) {
+		Airline airline = new Airline();
+		airline.setName("American Airlines");
+		airlineService.create(airline);
 		return "Hello " + name + "!";
 	}
 

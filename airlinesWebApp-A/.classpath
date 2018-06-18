@@ -25,9 +25,9 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/resources/META-INF/lib/jackson-module-jaxb-annotations-2.8.8.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/META-INF/lib/org.eclipse.persistence.moxy.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_151]">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
