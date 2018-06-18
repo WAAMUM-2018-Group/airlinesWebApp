@@ -11,18 +11,17 @@ import cs545.airline.service.AirplaneService;
 import cs545.airline.service.AirportService;
 import cs545.airline.service.FlightService;
 
-@Named
-@SessionScoped
+
 public class FlightBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	@Inject
+	
 	private FlightService flishtService;
-	@Inject
+
 	private AirlineService airlineService;
-	@Inject
+
 	private AirplaneService airplaneService;
-	@Inject
+
 	private AirportService airportService;
 	
 	private String flightnr;
