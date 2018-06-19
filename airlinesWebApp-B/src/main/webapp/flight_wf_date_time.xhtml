@@ -1,0 +1,65 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<h3>Basic flight details</h3>
+		<div class="card">
+			<div class="card-header"></div>
+			<div class="card-body">
+				<f:view>
+					<h:form>
+						<div class="form-inline">
+							<h:outputLabel>Flight Date:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:inputText value="#{airlineController.departureDate}"
+								class="form-control">
+								<f:convertDateTime pattern="d-M-yyyy" />
+								</h:inputText>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<br/><br/>
+							<h:outputLabel>Flight Departure Time:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:inputText value="#{airlineController.departureTime}"
+								class="form-control">
+								<f:convertDateTime pattern="h:mm a" />
+								</h:inputText>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<br/><br/>
+							<h:outputLabel>Flight Arrival Date:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:inputText value="#{airlineController.arrivalDate}"
+								class="form-control">
+								<f:convertDateTime pattern="d-M-yyyy" />
+								</h:inputText>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<br/><br/>
+							<h:outputLabel>Flight Arrival Time:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:inputText value="#{airlineController.arrivalTime}"
+								class="form-control">
+								<f:convertDateTime pattern="h:mm a" />
+								</h:inputText>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<br/><br/>
+							<h:commandButton value="Proceed"
+								action="flight_wf_airports"
+								class="btn btn-primary"></h:commandButton>
+							&nbsp;
+						</div>
+						<br />
+					</h:form>
+				</f:view>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

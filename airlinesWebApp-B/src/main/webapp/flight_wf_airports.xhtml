@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<h3>Basic flight details</h3>
+		<div class="card">
+			<div class="card-header"></div>
+			<div class="card-body">
+				<f:view>
+					<h:form>
+						<div class="form-inline">
+							<h:outputLabel>Origin:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:selectOneMenu value="#{airlineController.airportOrigin}" class="form-control">
+								<f:selectItems value="#{airlineController.airportList}" var="airport"
+									itemLabel="#{airport.airportcode}" itemValue="#{airplane.airportcode}" />
+							</h:selectOneMenu>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<br/><br/>
+							<h:outputLabel>Destination:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:selectOneMenu value="#{airlineController.airportDestination}" class="form-control">
+								<f:selectItems value="#{airlineController.airportList}" var="airport"
+									itemLabel="#{airport.airportcode}" itemValue="#{airplane.airportcode}" />
+							</h:selectOneMenu>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<br/><br/>
+							<h:commandButton value="Add"
+								action="#{airlineController.createFlight()}"
+								class="btn btn-primary"></h:commandButton>
+							&nbsp;
+						</div>
+						<br />
+					</h:form>
+				</f:view>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
