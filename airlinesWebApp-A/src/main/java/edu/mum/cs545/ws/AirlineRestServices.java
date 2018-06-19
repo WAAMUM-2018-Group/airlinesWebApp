@@ -28,7 +28,6 @@ import io.swagger.v3.oas.annotations.Parameter;
  * @author romiezaw
  *
  */
-   
 @Path("airlines")
 @Api(value = "airlines", description = "REST API to interact with Airline service")
 @Produces({"application/xml","application/json"})
