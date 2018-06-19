@@ -15,8 +15,8 @@ import cs545.airline.service.AirlineService;
 import cs545.airline.service.AirplaneService;
 import cs545.airline.service.AirportService;
 
-@Named
-@RequestScoped
+//@Named
+//@RequestScoped
 public class TestAirlineService {
 	// Due to difficulties instantiating the context in JUnit I included this
 	// pseudotest class
