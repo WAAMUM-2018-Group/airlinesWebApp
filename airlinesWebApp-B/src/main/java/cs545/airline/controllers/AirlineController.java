@@ -58,6 +58,12 @@ public class AirlineController implements Serializable {
 		this.arrivalTime = new Date();
 	}
 
+	public String navigateToAirlineFlight(String name){	
+		this.airline = this.airlineService.findByName(name);
+		
+		return "airline_flight_details";
+	}
+	
 	/*
 	 * This populated the all the air lines and initialize wrapper objects
 	 */

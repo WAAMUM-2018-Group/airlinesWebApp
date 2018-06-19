@@ -1,0 +1,148 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<h3>Airline Flight Details</h3>
+		<div class="card">
+			<div class="card-header">#{airlineController.airline.name}</div>
+			<div class="card-body">
+				<f:view>
+					<h:form>
+						<div class="form-inline">
+							<h:commandButton value="Add Flights"
+								action="#{airlineController.addAirline()}"
+								class="btn btn-primary"></h:commandButton>
+							&nbsp;
+						</div>
+						<br />
+					</h:form>
+				</f:view>
+
+				<h:form>
+					<div class="card">
+						<div class="card-header">
+							<h3>Airlines</h3>
+						</div>
+						<div class="card-body">
+							<h:dataTable value="#{airlineController.airline.flights}"
+								var="flight" class="table">
+								<h:column>
+									<f:facet name="header">Flight Id</f:facet>
+									<h:outputText value="#{flight.id}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Flight Name</f:facet>
+									<h:inputText value="#{flight.flightnr}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.flightnr}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Departure Date</f:facet>
+									<h:inputText value="#{flight.departureDate}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.departureDate}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Departure Time</f:facet>
+									<h:inputText value="#{flight.departureTime}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.departureTime}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Arrival Date</f:facet>
+									<h:inputText value="#{flight.arrivalDate}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.arrivalDate}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Arrival Time</f:facet>
+									<h:inputText value="#{flight.arrivalTime}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.arrivalTime}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Origin</f:facet>
+									<h:outputText value="#{flight.origin.name}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Code</f:facet>
+									<h:inputText value="#{flight.origin.airportcode}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.origin.airportcode}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Destination</f:facet>
+									<h:outputText value="#{flight.destination.name}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Code</f:facet>
+									<h:inputText value="#{flight.destination.airportcode}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.destination.airportcode}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Airplane</f:facet>
+									<h:inputText value="#{flight.airplane.model}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{flight.airplane.model}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Capacity</f:facet>
+
+									<h:outputText value="#{flight.airplane.capacity}"
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">Action</f:facet>
+									<h:commandButton value="Edit"
+										action="#{airlineController.editAction(airlineWrapper)}"
+										rendered="#{not airlineWrapper.editable}"
+										class="btn btn-success" />
+									<h:commandButton value="Delete"
+										action="#{airlineController.deleteAction(airlineWrapper)}"
+										rendered="#{not airlineWrapper.editable}"
+										class="btn btn-danger" />
+								</h:column>
+							</h:dataTable>
+							<h:commandButton value="Save Changes"
+								action="#{airlineController.saveAction}" class="btn btn-primary" />
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

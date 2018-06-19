@@ -65,6 +65,10 @@
 										action="#{airlineController.deleteAction(airlineWrapper)}"
 										rendered="#{not airlineWrapper.editable}" 
 										class="btn btn-danger"/>
+									<h:commandButton value="View"
+										action="#{airlineController.navigateToAirlineFlight(airlineWrapper.airline.name)}"
+										rendered="#{not airlineWrapper.editable}" 
+										class="btn btn-danger"/>
 								</h:column>
 							</h:dataTable>
 							<h:commandButton value="Save Changes" action="#{airlineController.saveAction}" 
