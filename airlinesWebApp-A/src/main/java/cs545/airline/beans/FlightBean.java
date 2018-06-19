@@ -25,7 +25,6 @@ public class FlightBean implements Serializable{
 	@Inject
 	private AirportService airportService;
 	
-	private int test;
 	private String flightnr;
 	private String airportcode;
 	private String serialnr;

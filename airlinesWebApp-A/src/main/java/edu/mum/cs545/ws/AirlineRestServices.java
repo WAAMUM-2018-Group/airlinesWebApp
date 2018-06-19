@@ -7,8 +7,10 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -26,7 +28,7 @@ import io.swagger.v3.oas.annotations.Parameter;
  * @author romiezaw
  *
  */
-
+   
 @Path("airlines")
 @Api(value = "airlines", description = "REST API to interact with Airline service")
 @Produces({"application/xml","application/json"})
@@ -40,7 +42,6 @@ public class AirlineRestServices {
 	@ApiOperation(value="Get All Airlines", notes = "Get all airlines", 
 				response=Airline.class, responseContainer="List")
 	public List<Airline> getAllAirlines() {
-		int a;
 		return airlineService.findAll();
 		
 	}
@@ -52,20 +53,34 @@ public class AirlineRestServices {
 	public Airline getAirlineByName(@PathParam("name") String name) {
 		return airlineService.findByName(name);
 	}
-//	
-//	@GET
-//	@Path("/")
-//	@ApiOperation(value="Get airline by flight", notes="Get all airlines by flight",
-//				response=Airline.class, responseContainer="List")
-//	public List<Airline> getAirlinesByFlight(Flight flight){
-//		return airlineService.findByFlight(flight);
-//	}
-//	
+	
+	@GET
+	@Path("/")
+	@ApiOperation(value="Get airline by flight", notes="Get all airlines by flight",
+				response=Airline.class, responseContainer="List")
+	public List<Airline> getAirlinesByFlight(Flight flight){
+		return airlineService.findByFlight(flight);
+	}
+	
 	@POST
-	@ApiOperation(value="Add airline" , notes="Add a new airline")
+	@ApiOperation(value="Add airline" , notes="Add a new airline" , response = Airline.class)
 	public Response addAirline(@Parameter(description="Airline object to add to the list", required = true)  Airline airline) {
 		airlineService.create(airline);
 		return Response.ok().entity(airline).build();
 	}
 	
+	@PUT
+	@ApiOperation(value="Update airline" , notes="Update an airline" , response = Airline.class)
+	public Response updateAirline(@Parameter(description="Airline object to update to the list", required = true)  Airline airline) {
+		airlineService.update(airline);
+		return Response.ok().entity(airline).build();
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	@ApiOperation(value="Delete airline", notes="Delete an airline")
+	public void deleteAirline(@PathParam("id") Long id) {
+		Airline airlineToDelete = airlineService.findById(id);
+		airlineService.delete(airlineToDelete);
+	}
 }
