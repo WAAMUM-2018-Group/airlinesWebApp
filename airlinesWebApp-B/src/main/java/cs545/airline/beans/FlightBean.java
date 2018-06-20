@@ -15,6 +15,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,14 +39,13 @@ public class FlightBean implements Serializable{
 	private String airportcode;
 	private Date departureDate;
 	private Date arrivalDate;
-	private String typeOfSearch = "all";
+	private String typeOfSearch ="all";
 	private static List<Pair<String, String>> typeOfSearchs;
 	
 	private List<Flight> flights;
 	@PostConstruct
     public void init() {
-		System.out.println("==========================================************=================1111");
-		filter();
+		filterOnRequest();
     }
 
 	public List<Pair<String, String>> getTypeOfSearchs() {
@@ -55,7 +55,6 @@ public class FlightBean implements Serializable{
         typeOfSearchs.add(new Pair<>("Airline", "airline"));
         typeOfSearchs.add(new Pair<>("Origin", "origin"));
         typeOfSearchs.add(new Pair<>("Destination", "destination"));
-        System.out.println("==========================================************=================222");
         return typeOfSearchs;
     }
 	
@@ -116,6 +115,10 @@ public class FlightBean implements Serializable{
 		this.typeOfSearch = typeOfSearch;
 	}
 	
+	public boolean checkType(String value) {
+		return typeOfSearch.equals(value)?true:false;
+	}
+	
 	public List<Flight> getListOfAllFlights(){
 		 flights=flightService.findAll();
 		 return flights;
@@ -127,16 +130,17 @@ public class FlightBean implements Serializable{
 		return flights;
 	}
 	
-	public List<Flight> getListOfAllFlightsByArrivalDate(Date arrivalDate){
-		return flights=flightService.findByDeparture(departureDate);
-	}
 
 	public List<Flight> getListOfAllFlightsByAirLine(String airlineName){
-		return flights=flightService.findByAirline(airlineService.findByName(airlineName));
+		 flights=flightService.findByAirline(airlineService.findByName(airlineName));
+		 return flights;
 	}
 	
 	public List<Flight> getListOfAllFlightsByOrigin(String airportcode){
-		 return flights=flightService.findByOrigin(airportService.findByCode(airportcode));
+		Airport a1=new Airport();
+		a1=airportService.findByCode(airportcode);
+		 flights=flightService.findByOrigin(a1);
+		 return flights;
 	}
 	
 	
@@ -156,13 +160,10 @@ public class FlightBean implements Serializable{
         return airplaneService.findAll();
     }
 	
-    public void filter() {
+    public void filterOnRequest() {
         switch (typeOfSearch) {
             case "departureDateTime":
             	getListOfAllFlightsByDeparture(departureDate);
-                break;
-            case "arrivalDateTime":
-            	getListOfAllFlightsByArrivalDate(arrivalDate);
                 break;
             case "airline":
             	getListOfAllFlightsByAirLine(airlineName);
