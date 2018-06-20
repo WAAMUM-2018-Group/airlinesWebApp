@@ -2,38 +2,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-	<meta charset="UTF-8" />
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-</h:head>
-<h:body>
-	<div class="container">
-	<f:view>
-		<h:outputText>Welcome to RAJ Airline Webapp</h:outputText>
-		<h:form>
-		<div class="form-group">
-			<a href="cirline.xh">Airline</a>
+<ui:composition template="/airlineflight/page-template.xhtml">
+	<ui:param name="pageTitle" value="Flight Schedule" />
+	<ui:define name="panel-main">
+		<div class="page">
+			<div class="text-center mb-4">
+				<h1 class="h3 mb-3 font-weight-normal">RAJ Airlines</h1>
+			</div>
+			<div class="form-label-group text-center mb-4">
+				<p>WAA final project</p>
+			</div>
+			<div class="form-label-group text-center mb-4">
+				<p>Group members:</p>
+				<strong>Romie, Abiel and Jeewan</strong>
+			</div>
 		</div>
-		<div class="form-group">
-			<h:commandButton value="List All Accounts" action="#{bankController.listAllAccounts()}" class="btn btn-default"></h:commandButton>
-		</div>
-		<div class="form-group">
-			<h:commandButton value="View Account Details" action="#{bankController.accountDetails()}" class="btn btn-default"></h:commandButton>
-		</div>
-		<div class="form-group">
-			<h:commandButton value="Deposit Money" action="#{bankController.depositMoney()}" class="btn btn-default"></h:commandButton>
-		</div>
-		<div class="form-group">
-			<h:commandButton value="Withdraw Money" action="#{bankController.withdrawMoney()}" class="btn btn-default"></h:commandButton>
-		</div>
-		</h:form>
-	</f:view>
-	</div>
-
-</h:body>
+	</ui:define>
+</ui:composition>
 </html>
