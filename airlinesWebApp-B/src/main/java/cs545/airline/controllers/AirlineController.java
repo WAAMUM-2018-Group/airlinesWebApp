@@ -2,10 +2,10 @@ package cs545.airline.controllers;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -29,15 +29,6 @@ public class AirlineController implements Serializable {
 	private String airlineName;
 	private Airline airline;
 	private Flight flight;
-	private String flightNumber;
-	private String airplaneSerialnr;
-	private Airplane airplane;
-	private Date departureDate;
-	private Date arrivalDate;
-	private Date departureTime;
-	private Date arrivalTime;
-	private String airportOrigin;
-	private String airportDestination;
 
 	private List<AirlineWrapper> airlineList;
 
@@ -47,23 +38,28 @@ public class AirlineController implements Serializable {
 	private AirplaneService airplaneService;
 	@Inject
 	private AirportService airportService;
-	
+
 	public AirlineController() {
 		this.airlineList = new ArrayList<AirlineWrapper>();
-		//this.flight = new Flight();
-		//this.airplane = new Airplane();
-		this.departureDate = new Date();
-		this.arrivalDate = new Date();
-		this.departureTime = new Date();
-		this.arrivalTime = new Date();
+		// this.flight = new Flight();
+		// this.airplane = new Airplane();
 	}
 
-	public String navigateToAirlineFlight(String name){	
+	/*Add a flash attribute to pass to web flow
+	 * */
+	public String navigateToAirlineflightFlow(String name) {
+		if (name != null) {
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("airlineName", name);
+		}
+		return "airlineflight";
+	}
+
+	public String navigateToAirlineFlight(String name) {
 		this.airline = this.airlineService.findByName(name);
-		
+
 		return "airline_flight_details";
 	}
-	
+
 	/*
 	 * This populated the all the air lines and initialize wrapper objects
 	 */
@@ -76,10 +72,10 @@ public class AirlineController implements Serializable {
 		for (Airline al : airlines) {
 			airlineWrapper = new AirlineWrapper();
 			airlineWrapper.setAirline(al);
-		    tempAirlineList.add(airlineWrapper);
+			tempAirlineList.add(airlineWrapper);
 		}
-		for(AirlineWrapper alWrapper: tempAirlineList) {
-			if(this.airlineList.contains(alWrapper)) {
+		for (AirlineWrapper alWrapper : tempAirlineList) {
+			if (this.airlineList.contains(alWrapper)) {
 				int index = this.airlineList.indexOf(alWrapper);
 				airlineWrapper = this.airlineList.get(index);
 				alWrapper.setEditable(airlineWrapper.isEditable());
@@ -88,85 +84,15 @@ public class AirlineController implements Serializable {
 		this.airlineList = tempAirlineList;
 		return airlineList;
 	}
-	
-	public List<Airport> getAirportList(){
+
+	public List<Airport> getAirportList() {
 		return this.airportService.findAll();
 	}
-	public String getAirportOrigin() {
-		return airportOrigin;
-	}
 
-	public void setAirportOrigin(String airportOrigin) {
-		this.airportOrigin = airportOrigin;
-	}
-
-	public String getAirportDestination() {
-		return airportDestination;
-	}
-
-	public void setAirportDestination(String airportDestination) {
-		this.airportDestination = airportDestination;
-	}
-
-	public Date getArrivalDate() {
-		return arrivalDate;
-	}
-
-	public void setArrivalDate(Date arrivalDate) {
-		this.arrivalDate = arrivalDate;
-	}
-
-	public Date getDepartureTime() {
-		return departureTime;
-	}
-
-	public void setDepartureTime(Date departureTime) {
-		this.departureTime = departureTime;
-	}
-
-	public Date getArrivalTime() {
-		return arrivalTime;
-	}
-
-	public void setArrivalTime(Date arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
-
-	public String getAirplaneSerialnr() {
-		return airplaneSerialnr;
-	}
-
-	public void setAirplaneSerialnr(String airplaneSerialnr) {
-		this.airplaneSerialnr = airplaneSerialnr;
-	}
-
-	public String getFlightNumber() {
-		return flightNumber;
-	}
-
-	public void setFlightNumber(String flightNumber) {
-		this.flightNumber = flightNumber;
-	}
-
-	public Date getDepartureDate() {
-		return departureDate;
-	}
-
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-	}
-
-	public Airplane getAirplane() {
-		return airplane;
-	}
-
-	public void setAirplane(Airplane airplane) {
-		this.airplane = airplane;
-	}
-
-	public List<Airplane> getAirplanesList(){
+	public List<Airplane> getAirplanesList() {
 		return this.airplaneService.findAll();
 	}
+
 	public Flight getFlight() {
 		return flight;
 	}
@@ -195,23 +121,9 @@ public class AirlineController implements Serializable {
 		this.airlineName = airlineName;
 	}
 
-	/* Create new flights to an airline
-	 * */
-	public void createFlight() {
-		this.airline = getAirlineByName(this.airlineName);
-		this.flight = new Flight(this.flightNumber, 
-									this.departureDate.toString(), 
-										this.departureTime.toString(), 
-											this.arrivalDate.toString(), 
-												this.arrivalTime.toString());
-		this.flight.setAirplane(this.airplaneService.findBySrlnr(airplaneSerialnr));
-		this.flight.setOrigin(this.airportService.findByCode(airportOrigin));
-		this.flight.setDestination(this.airportService.findByCode(airportDestination));
-		this.airline.addFlight(this.flight);
-		this.airlineService.update(this.airline);
-	}
-	/* Create a new airline 
-	 * */
+	/*
+	 * Create a new airline
+	 */
 	public void addAirline() {
 
 		this.airline = new Airline();
@@ -225,8 +137,9 @@ public class AirlineController implements Serializable {
 		return null;
 	}
 
-	/*This method save changes to all airlines names.
-	 * */
+	/*
+	 * This method save changes to all airlines names.
+	 */
 	public void saveAction() {
 
 		for (AirlineWrapper airLine : this.airlineList) {
@@ -246,7 +159,7 @@ public class AirlineController implements Serializable {
 
 		return airlineService.findAll();
 	}
-	
+
 	public Airline getAirlineByName(String name) {
 		return this.airlineService.findByName(name);
 	}
