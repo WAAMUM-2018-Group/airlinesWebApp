@@ -23,21 +23,25 @@
 					<h:form>
 						<div class="form-inline">
 							<h:outputLabel>Origin:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:selectOneMenu value="#{airlineFlightFlowBean.airportOrigin}" class="form-control">
-								<f:selectItems value="#{airlineController.airportList}" var="airport"
-									itemLabel="#{airport.airportcode}" itemValue="#{airport.airportcode}" />
+							<h:selectOneMenu value="#{airlineFlightFlowBean.airportOrigin}"
+								class="form-control">
+								<f:selectItems value="#{airlineController.airportList}"
+									var="airport" itemLabel="#{airport.airportcode}"
+									itemValue="#{airport.airportcode}" />
 							</h:selectOneMenu>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<br/><br/>
+							&nbsp;&nbsp;&nbsp;&nbsp; <br />
+							<br />
 							<h:outputLabel>Destination:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:selectOneMenu value="#{airlineFlightFlowBean.airportDestination}" class="form-control">
-								<f:selectItems value="#{airlineController.airportList}" var="airport"
-									itemLabel="#{airport.airportcode}" itemValue="#{airport.airportcode}" />
+							<h:selectOneMenu
+								value="#{airlineFlightFlowBean.airportDestination}"
+								class="form-control">
+								<f:selectItems value="#{airlineController.airportList}"
+									var="airport" itemLabel="#{airport.airportcode}"
+									itemValue="#{airport.airportcode}" />
 							</h:selectOneMenu>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<br/><br/>
-							<h:commandButton value="Add"
-								action="returnFromAirlineflightFlow"
+							&nbsp;&nbsp;&nbsp;&nbsp; <br />
+							<br />
+							<h:commandButton value="Add" action="returnFromAirlineflightFlow"
 								class="btn btn-primary"></h:commandButton>
 							&nbsp;
 						</div>
