@@ -45,8 +45,9 @@ public class AirlineController implements Serializable {
 		// this.airplane = new Airplane();
 	}
 
-	/*Add a flash attribute to pass to web flow
-	 * */
+	/*
+	 * Add a flash attribute to pass to web flow
+	 */
 	public String navigateToAirlineflightFlow(String name) {
 		if (name != null) {
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("airlineName", name);
