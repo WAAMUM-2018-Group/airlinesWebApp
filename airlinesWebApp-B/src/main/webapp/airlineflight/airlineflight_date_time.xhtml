@@ -5,7 +5,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 	<link rel="stylesheet"
@@ -23,35 +22,35 @@
 					<h:form>
 						<div class="form-inline">
 							<h:outputLabel>Flight Date:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineController.departureDate}"
+							<h:inputText value="#{airlineFlightFlowBean.departureDate}"
 								class="form-control">
-								<f:convertDateTime pattern="d-M-yyyy" />
+								<!-- <f:convertDateTime pattern="MM/dd/yy" /> -->
 								</h:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:outputLabel>Flight Departure Time:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineController.departureTime}"
+							<h:inputText value="#{airlineFlightFlowBean.departureTime}"
 								class="form-control">
-								<f:convertDateTime pattern="h:mm a" />
+								<!-- <f:convertDateTime pattern="h:mm a" /> -->
 								</h:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:outputLabel>Flight Arrival Date:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineController.arrivalDate}"
+							<h:inputText value="#{airlineFlightFlowBean.arrivalDate}"
 								class="form-control">
-								<f:convertDateTime pattern="d-M-yyyy" />
+								<!-- <f:convertDateTime pattern="MM/dd/yy" /> -->
 								</h:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:outputLabel>Flight Arrival Time:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineController.arrivalTime}"
+							<h:inputText value="#{airlineFlightFlowBean.arrivalTime}"
 								class="form-control">
-								<f:convertDateTime pattern="h:mm a" />
+								<!-- <f:convertDateTime pattern="h:mm a" /> -->
 								</h:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:commandButton value="Proceed"
-								action="flight_wf_airports"
+								action="airlineflight_airports"
 								class="btn btn-primary"></h:commandButton>
 							&nbsp;
 						</div>
