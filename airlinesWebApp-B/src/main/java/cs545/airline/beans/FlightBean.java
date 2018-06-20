@@ -40,23 +40,27 @@ public class FlightBean implements Serializable{
 	private Date departureDate;
 	private Date arrivalDate;
 	private String typeOfSearch ="all";
-	private static List<Pair<String, String>> typeOfSearchs;
-	
+
+	List<String> typeOfSearchs = new ArrayList<String>();
+
 	private List<Flight> flights;
+	
 	@PostConstruct
     public void init() {
+		typeOfSearchs.add("All");
+		typeOfSearchs.add("Departure Time");
+		typeOfSearchs.add("Airline");
+		typeOfSearchs.add("Origin");
+		typeOfSearchs.add("Destination");
 		filterOnRequest();
     }
-
-	public List<Pair<String, String>> getTypeOfSearchs() {
-        typeOfSearchs = new ArrayList<>();
-        typeOfSearchs.add(new Pair<>("All", "all"));
-        typeOfSearchs.add(new Pair<>("Departure Time", "departureDateTime"));
-        typeOfSearchs.add(new Pair<>("Airline", "airline"));
-        typeOfSearchs.add(new Pair<>("Origin", "origin"));
-        typeOfSearchs.add(new Pair<>("Destination", "destination"));
+	
+	public List<String> getTypeOfSearchs() {
+		
         return typeOfSearchs;
     }
+
+
 	
 	public String getTypeOfSearch() {
 		return typeOfSearch;
@@ -116,7 +120,7 @@ public class FlightBean implements Serializable{
 	}
 	
 	public boolean checkType(String value) {
-		return typeOfSearch.equals(value)?true:false;
+		return typeOfSearch.equals(value);
 	}
 	
 	public List<Flight> getListOfAllFlights(){
@@ -162,16 +166,16 @@ public class FlightBean implements Serializable{
 	
     public void filterOnRequest() {
         switch (typeOfSearch) {
-            case "departureDateTime":
+            case "Departure Time":
             	getListOfAllFlightsByDeparture(departureDate);
                 break;
-            case "airline":
+            case "Airline":
             	getListOfAllFlightsByAirLine(airlineName);
                 break;
-            case "origin":
+            case "Origin":
             	getListOfAllFlightsByOrigin(airportcode);
                 break;
-            case "destination":
+            case "Destination":
             	getListOfAllFlightsByDestination(airportcode);
                 break;
             default:

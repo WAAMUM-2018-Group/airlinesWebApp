@@ -14,10 +14,9 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 	<link rel="stylesheet"
 		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" />
 </h:head>
 <h:body>
+	<ui:include src="/airlineflight/page-header.xhtml" />
 	<div class="container">
 		<div class="card">
 			<div class="card-header">Flight Details</div>
@@ -26,16 +25,16 @@
 					<div class="form-inline">
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="filterType">Filter type:</label>
-							<h:selectOneMenu value="${flightBean.typeOfSearch}"
-								styleClass="form-control" id="filterType">
-								<f:selectItems value="#{flightBean.typeOfSearchs}" var="c"
-									itemLabel="#{c.key}" itemValue="#{c.value}" />
+
+							<h:selectOneMenu value="#{flightBean.typeOfSearch}" styleClass="form-control" id="filterType">
+								<f:selectItems value="#{flightBean.typeOfSearchs}" />
 								<f:ajax event="change" execute="@this" render="@form" />
 							</h:selectOneMenu>
+
 						</div>
 						<div class="form-group mx-sm-3 mb-2">
 							<ui:fragment
-								rendered="#{flightBean.checkType('departureDateTime')}">
+								rendered="#{flightBean.checkType('Departure Time')}">
 								<label>Date and Time Of Departure:</label>
 								<h:inputText value="#{flightBean.departureDate}"
 									styleClass="form-control">
@@ -44,16 +43,16 @@
 								<small class="form-text text-muted">Ex: 8/30/09 10:10 PM</small>
 							</ui:fragment>
 
-							<ui:fragment rendered="#{flightBean.checkType('airline')}">
-								<label >Airline Name: </label>
+							<ui:fragment rendered="#{flightBean.checkType('Airline')}">
+								<label>Airline Name: </label>
 								<h:selectOneMenu value="#{flightBean.airlineName}"
 									styleClass="form-control">
 									<f:selectItems value="#{flightBean.getAirlines()}" var="c"
 										itemLabel="#{c.getName()}" itemValue="#{c.getName()}" />
 								</h:selectOneMenu>
 							</ui:fragment>
-							
-							<ui:fragment rendered="#{flightBean.checkType('origin')}">
+
+							<ui:fragment rendered="#{flightBean.checkType('Origin')}">
 								<label>Airport Code: </label>
 								<h:selectOneMenu value="#{flightBean.airportcode}"
 									styleClass="form-control">
@@ -62,7 +61,7 @@
 										itemValue="#{c.getAirportcode()}" />
 								</h:selectOneMenu>
 							</ui:fragment>
-							<ui:fragment rendered="#{flightBean.checkType('destination')}">
+							<ui:fragment rendered="#{flightBean.checkType('Destination')}">
 								<label>Airport Code: </label>
 								<h:selectOneMenu value="#{flightBean.airportcode}"
 									styleClass="form-control">
@@ -75,7 +74,8 @@
 					</div>
 					<div>
 						<h:commandButton value="Search"
-							action="#{flightBean.filterOnRequest()}" />
+							action="#{flightBean.filterOnRequest()}">
+						</h:commandButton>
 
 					</div>
 				</h:form>
@@ -90,7 +90,7 @@
 					<div class="card-header">
 						<div class="card-body  table-responsive">
 							<h:dataTable value="#{flightBean.flights}" var="flight"
-								class="table table-hover table-light">
+								class="table table-hover table-light" id="table1">
 								<h:column>
 									<f:facet name="header">Flight Number</f:facet> #{flight.flightnr}
 								</h:column>

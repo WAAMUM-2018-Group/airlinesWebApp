@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view contentType="text/html">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <title>RAJ Airline - #{pageTitle}</title>
+        <link rel="stylesheet" type="text/css" href="https://v7-3-26-dot-lead-pages.appspot.com/static/lp1529405430/min/bootstrap.min.css"/>
+        <link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.3999ac261b914f8b8b5e85df0ff3eaea.css"/>
+        <link rel="stylesheet" type="text/css" href="https://v7-3-26-dot-lead-pages.appspot.com/static/lp1529405430/min/preview.css"/>
+        <link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+    </h:head>
+    <h:body>
+        <ui:include src="/airlineflight/page-header.xhtml"/>
+        <ui:insert name="panel-main">
+            <section>
+                <h1>Main Panel</h1>
+                <p>Placeholder text.</p>
+            </section>
+        </ui:insert>
+        <ui:include src="/airlineflight/page-footer.xhtml"/>
+    </h:body>
+</f:view>
+</html>
