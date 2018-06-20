@@ -1,0 +1,83 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</h:head>
+<h:body>
+	<div class="container">
+		<h3>New Airline</h3>
+		<div class="card">
+			<div class="card-header">Airline</div>
+			<div class="card-body">
+				<f:view>
+					<h:form>
+						<div class="form-inline">
+							<h:outputLabel>Airline Name:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
+							<h:inputText value="#{airlineController.airlineName}"
+								class="form-control"></h:inputText>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<h:commandButton value="Add"
+								action="#{airlineController.addAirline()}"
+								class="btn btn-primary"></h:commandButton>
+							&nbsp;
+						</div>
+						<br />
+					</h:form>
+				</f:view>
+
+				<h:form>
+					<div class="card">
+						<div class="card-header">
+							<h3>Airlines</h3>
+						</div>
+						<div class="card-body">
+							<h:dataTable value="#{airlineController.airlineList}"
+								var="airlineWrapper" class="table">
+								<h:column>
+									<f:facet name="header">Airline Id</f:facet> 
+									<h:outputText value="#{airlineWrapper.airline.id}"/>
+						</h:column>
+								<h:column>
+									<f:facet name="header">Airline Name</f:facet>
+									<h:inputText value="#{airlineWrapper.airline.name}"
+										class="form-control" rendered="#{airlineWrapper.editable}" />
+
+									<h:outputText value="#{airlineWrapper.airline.name}" 
+										class="form-control" rendered="#{not airlineWrapper.editable}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Action</f:facet>
+									<h:commandButton value="Edit"
+										action="#{airlineController.editAction(airlineWrapper)}"
+										rendered="#{not airlineWrapper.editable}" 
+										class="btn btn-success"/>
+									<h:commandButton value="Delete"
+										action="#{airlineController.deleteAction(airlineWrapper)}"
+										rendered="#{not airlineWrapper.editable}" 
+										class="btn btn-danger"/>
+									<h:commandButton value="View"
+										action="#{airlineController.navigateToAirlineFlight(airlineWrapper.airline.name)}"
+										rendered="#{not airlineWrapper.editable}" 
+										class="btn btn-danger"/>
+								</h:column>
+							</h:dataTable>
+							<h:commandButton value="Save Changes" action="#{airlineController.saveAction}" 
+								class="btn btn-primary"/>
+						</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

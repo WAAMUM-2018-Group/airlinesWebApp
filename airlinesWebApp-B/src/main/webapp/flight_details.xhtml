@@ -1,0 +1,128 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" />
+</h:head>
+<h:body>
+	<ui:include src="/airlineflight/page-header.xhtml" />
+	<div class="container">
+		<div class="card">
+			<div class="card-header">Flight Details</div>
+			<div class="card-body">
+				<h:form>
+					<div class="form-inline">
+						<div class="form-group mx-sm-3 mb-2">
+							<label for="filterType">Filter type:</label>
+
+							<h:selectOneMenu value="#{flightBean.typeOfSearch}" styleClass="form-control" id="filterType">
+								<f:selectItems value="#{flightBean.typeOfSearchs}" />
+								<f:ajax event="change" execute="@this" render="@form" />
+							</h:selectOneMenu>
+
+						</div>
+						<div class="form-group mx-sm-3 mb-2">
+							<ui:fragment
+								rendered="#{flightBean.checkType('Departure Time')}">
+								<label>Date and Time Of Departure:</label>
+								<h:inputText value="#{flightBean.departureDate}"
+									styleClass="form-control">
+									<f:convertDateTime pattern="M/d/yy h:m a" />
+								</h:inputText>
+								<small class="form-text text-muted">Ex: 8/30/09 10:10 PM</small>
+							</ui:fragment>
+
+							<ui:fragment rendered="#{flightBean.checkType('Airline')}">
+								<label>Airline Name: </label>
+								<h:selectOneMenu value="#{flightBean.airlineName}"
+									styleClass="form-control">
+									<f:selectItems value="#{flightBean.getAirlines()}" var="c"
+										itemLabel="#{c.getName()}" itemValue="#{c.getName()}" />
+								</h:selectOneMenu>
+							</ui:fragment>
+
+							<ui:fragment rendered="#{flightBean.checkType('Origin')}">
+								<label>Airport Code: </label>
+								<h:selectOneMenu value="#{flightBean.airportcode}"
+									styleClass="form-control">
+									<f:selectItems value="#{flightBean.getAirports()}" var="c"
+										itemLabel="#{c.getAirportcode()}"
+										itemValue="#{c.getAirportcode()}" />
+								</h:selectOneMenu>
+							</ui:fragment>
+							<ui:fragment rendered="#{flightBean.checkType('Destination')}">
+								<label>Airport Code: </label>
+								<h:selectOneMenu value="#{flightBean.airportcode}"
+									styleClass="form-control">
+									<f:selectItems value="#{flightBean.getAirports()}" var="c"
+										itemLabel="#{c.getAirportcode()}"
+										itemValue="#{c.getAirportcode()}" />
+								</h:selectOneMenu>
+							</ui:fragment>
+						</div>
+					</div>
+					<div>
+						<h:commandButton value="Search"
+							action="#{flightBean.filterOnRequest()}">
+						</h:commandButton>
+
+					</div>
+				</h:form>
+
+				<div id="page-wrapper" style="min-height: 557px;">
+					<div class="row">
+						<div class="col-lg-12">
+							<h1 class="page-header"></h1>
+						</div>
+					</div>
+
+					<div class="card-header">
+						<div class="card-body  table-responsive">
+							<h:dataTable value="#{flightBean.flights}" var="flight"
+								class="table table-hover table-light" id="table1">
+								<h:column>
+									<f:facet name="header">Flight Number</f:facet> #{flight.flightnr}
+								</h:column>
+
+								<h:column styleclass="row">
+									<f:facet name="header">Airline Name</f:facet> #{flight.airline.name}
+									</h:column>
+								<h:column>
+									<f:facet name="header">Departure date and Time</f:facet> #{flight.departureDate} #{flight.departureTime}
+									</h:column>
+								<h:column>
+									<f:facet name="header">Arrival date and Time</f:facet> #{flight.arrivalDate} #{flight.arrivalTime}
+									</h:column>
+								<h:column>
+									<f:facet name="header">Origin</f:facet> #{flight.origin.name} (#{flight.origin.airportcode})
+									</h:column>
+								<h:column>
+									<f:facet name="header">Destination</f:facet> #{flight.destination.name} (#{flight.destination.airportcode})
+									</h:column>
+								<h:column>
+									<f:facet name="header">Airplane model</f:facet> #{flight.airplane.model}
+									</h:column>
+								<h:column>
+									<f:facet name="header">Capacity</f:facet> #{flight.airplane.capacity}
+									</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
