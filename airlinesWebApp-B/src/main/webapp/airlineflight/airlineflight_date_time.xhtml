@@ -3,7 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -14,39 +16,40 @@
 </h:head>
 <h:body>
 	<div class="container">
+	<ui:include src="/fragments/page-header.xhtml" />
 		<h3>Basic flight details</h3>
 		<div class="card">
 			<div class="card-header"></div>
 			<div class="card-body">
 				<f:view>
-					<h:form>
+					<b:form>
 						<div class="form-inline">
 							<h:outputLabel>Flight Date:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineFlightFlowBean.departureDate}"
+							<b:inputText value="#{airlineFlightFlowBean.departureDate}"
 								class="form-control">
 								<!-- <f:convertDateTime pattern="MM/dd/yy" /> -->
-								</h:inputText>
+								</b:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:outputLabel>Flight Departure Time:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineFlightFlowBean.departureTime}"
+							<b:inputText value="#{airlineFlightFlowBean.departureTime}"
 								class="form-control">
 								<!-- <f:convertDateTime pattern="h:mm a" /> -->
-								</h:inputText>
+								</b:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:outputLabel>Flight Arrival Date:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineFlightFlowBean.arrivalDate}"
+							<b:inputText value="#{airlineFlightFlowBean.arrivalDate}"
 								class="form-control">
 								<!-- <f:convertDateTime pattern="MM/dd/yy" /> -->
-								</h:inputText>
+								</b:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:outputLabel>Flight Arrival Time:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
-							<h:inputText value="#{airlineFlightFlowBean.arrivalTime}"
+							<b:inputText value="#{airlineFlightFlowBean.arrivalTime}"
 								class="form-control">
 								<!-- <f:convertDateTime pattern="h:mm a" /> -->
-								</h:inputText>
+								</b:inputText>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<br/><br/>
 							<h:commandButton value="Proceed"
@@ -55,7 +58,7 @@
 							&nbsp;
 						</div>
 						<br />
-					</h:form>
+					</b:form>
 				</f:view>
 			</div>
 		</div>

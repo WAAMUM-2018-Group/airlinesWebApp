@@ -3,7 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet"
@@ -15,12 +17,13 @@
 </h:head>
 <h:body>
 	<div class="container">
+	<ui:include src="/fragments/page-header.xhtml" />
 		<h3>Airline Flight Details</h3>
 		<div class="card">
 			<div class="card-header">#{airlineController.airline.name}</div>
 			<div class="card-body">
 				<f:view>
-					<h:form>
+					<b:form>
 						<div class="form-inline">
 							<h:commandButton value="Add Flights"
 								action="#{airlineController.navigateToAirlineflightFlow(airlineController.airline.name)}"
@@ -28,23 +31,23 @@
 							&nbsp;
 						</div>
 						<br />
-					</h:form>
+					</b:form>
 				</f:view>
 
-				<h:form>
+				<b:form>
 					<div class="card">
 						<div class="card-header">
 							<h3>Airlines</h3>
 						</div>
 						<div class="card-body">
-							<h:dataTable value="#{airlineController.airline.flights}"
+							<b:dataTable value="#{airlineController.airline.flights}"
 								var="flight" class="table">
 								<h:column>
-									<f:facet name="header">Flight Id</f:facet>
+									<f:facet name="header">Id</f:facet>
 									<h:outputText value="#{flight.id}" />
 								</h:column>
 								<h:column>
-									<f:facet name="header">Flight Name</f:facet>
+									<f:facet name="header">Name</f:facet>
 									<h:inputText value="#{flight.flightnr}"
 										class="form-control" rendered="#{airlineWrapper.editable}" />
 
@@ -103,7 +106,7 @@
 								</h:column>
 								<h:column>
 									<f:facet name="header">Code</f:facet>
-									<h:inputText value="#{flight.destination.airportcode}"
+									<b:inputText value="#{flight.destination.airportcode}"
 										class="form-control" rendered="#{airlineWrapper.editable}" />
 
 									<h:outputText value="#{flight.destination.airportcode}"
@@ -111,7 +114,7 @@
 								</h:column>
 								<h:column>
 									<f:facet name="header">Airplane</f:facet>
-									<h:inputText value="#{flight.airplane.model}"
+									<b:inputText value="#{flight.airplane.model}"
 										class="form-control" rendered="#{airlineWrapper.editable}" />
 
 									<h:outputText value="#{flight.airplane.model}"
@@ -130,17 +133,18 @@
 										action="#{airlineController.editAction(airlineWrapper)}"
 										rendered="#{not airlineWrapper.editable}"
 										class="btn btn-success" />
+										&nbsp;&nbsp;
 									<h:commandButton value="Delete"
 										action="#{airlineController.deleteAction(airlineWrapper)}"
 										rendered="#{not airlineWrapper.editable}"
 										class="btn btn-danger" />
 								</h:column>
-							</h:dataTable>
+							</b:dataTable>
 							<h:commandButton value="Save Changes"
 								action="#{airlineController.saveAction}" class="btn btn-primary" />
 						</div>
 					</div>
-				</h:form>
+				</b:form>
 			</div>
 		</div>
 	</div>

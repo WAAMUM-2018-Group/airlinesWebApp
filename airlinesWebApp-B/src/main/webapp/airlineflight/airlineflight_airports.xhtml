@@ -3,7 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet"
@@ -15,12 +17,13 @@
 </h:head>
 <h:body>
 	<div class="container">
+	<ui:include src="/fragments/page-header.xhtml" />
 		<h3>Basic flight details</h3>
 		<div class="card">
 			<div class="card-header"></div>
 			<div class="card-body">
 				<f:view>
-					<h:form>
+					<b:form>
 						<div class="form-inline">
 							<h:outputLabel>Origin:&nbsp;&nbsp;&nbsp;&nbsp;</h:outputLabel>
 							<h:selectOneMenu value="#{airlineFlightFlowBean.airportOrigin}"
@@ -46,7 +49,7 @@
 							&nbsp;
 						</div>
 						<br />
-					</h:form>
+					</b:form>
 				</f:view>
 			</div>
 		</div>
